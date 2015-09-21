@@ -50,7 +50,8 @@ elixir(function(mix) {
         '../../' + paths.fontawesome + '/css/font-awesome.css',
         '../../' + paths.bootswatch + '/bootstrap.css',
         '../../' + paths.colorbox + '/example3/colorbox.css',
-        '../../' + paths.justifiedGallery + '/css/justifiedGallery.css'
+        '../../' + paths.justifiedGallery + '/css/justifiedGallery.css',
+        'main.css'
     ], 'public/css/site.css');
 
     // Merge Site scripts.
