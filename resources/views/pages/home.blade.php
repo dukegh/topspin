@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <a href="{{URL::to('news/'.$post->slug.'')}}" class="thumbnail"><img
+                            <a href="{{URL::to('article/'.$post->slug.'')}}" class="thumbnail"><img
                                         src="http://placehold.it/260x180" alt=""></a>
                         </div>
                         <div class="col-md-10">
@@ -29,7 +29,7 @@
 
                             <p>
                                 <a class="btn btn-mini btn-default"
-                                   href="{{URL::to('news/'.$post->slug.'')}}">Read more</a>
+                                   href="{{URL::to('article/'.$post->slug.'')}}">Read more</a>
                             </p>
                         </div>
                     </div>
