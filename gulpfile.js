@@ -1,3 +1,4 @@
+process.env.DISABLE_NOTIFIER = true;
 var gulp = require('gulp');
 var bower = require('gulp-bower');
 var elixir = require('laravel-elixir');
@@ -77,6 +78,7 @@ elixir(function(mix) {
         '../../' + paths.summernote + '/summernote-bs3.css',
         '../../' + paths.select2 + '/css/select2.css',
         'sb-admin-2.css',
+        'admin.css'
     ], 'public/css/admin.css');
 
     // Merge Admin scripts.
