@@ -7,6 +7,12 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Article
+ * @package App
+ *
+ * @property string content
+ */
 class Article extends Model implements SluggableInterface {
 
 	use SoftDeletes;

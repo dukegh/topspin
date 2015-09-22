@@ -14,6 +14,10 @@
              src="{!! URL::to('appfiles/article/'.$article->id.'/'.$article->picture) !!}"/>
     @endif
     <p>{!! $article->content !!}</p>
+    <ul class="pager">
+        <li class="{{$pages['previous'] ? '' : 'disabled'}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $pages['previous']) }}">Previous</a></li>
+        <li class="{{$pages['next'] ? '' : 'disabled'}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $pages['next']) }}">Next</a></li>
+    </ul>
     <div>
         <span class="badge badge-info">Posted {!!  $article->created_at !!} </span>
     </div>

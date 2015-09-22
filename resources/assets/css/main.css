@@ -43,5 +43,11 @@ a:focus {
 .dropdown-menu > li > a:focus {
     color: #262626;
 }
+.pager li > a:hover,
+.pager li > a:focus {
+    text-decoration: none;
+    background-color: #28659a;
+    border-color: #38C ;
+}
 
 
