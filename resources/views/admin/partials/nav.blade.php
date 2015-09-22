@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                {{--<li>
                     <a href="#">
                         <i class="glyphicon glyphicon-camera"></i> Photo items
                         <span class="fa arrow"></span>
@@ -59,7 +59,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--}}
                 <li>
                     <a href="{{url('admin/user')}}">
                         <i class="glyphicon glyphicon-user"></i> Users
