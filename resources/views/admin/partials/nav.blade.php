@@ -19,11 +19,11 @@
                         <i class="fa fa-dashboard fa-fw"></i> Dashboard
                     </a>
                 </li>
-                <li>
+                {{--<li>
                     <a href="{{url('admin/language')}}">
                         <i class="fa fa-language"></i> Language
                     </a>
-                </li>
+                </li>--}}
                 <li>
                     <a href="#">
                         <i class="glyphicon glyphicon-bullhorn"></i> Articles

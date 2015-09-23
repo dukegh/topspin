@@ -16,13 +16,21 @@
 <div class="tab-content">
     <!-- General tab -->
     <div class="tab-pane active" id="tab-general">
-        <div class="form-group  {{ $errors->has('language_id') ? 'has-error' : '' }}">
+        {{--<div class="form-group  {{ $errors->has('language_id') ? 'has-error' : '' }}">
             {!! Form::label('language_id', trans("admin/admin.language"), array('class' => 'control-label')) !!}
             <div class="controls">
                 {!! Form::select('language_id', $languages, @isset($article)? $article->language_id : 'default', array('class' => 'form-control')) !!}
                 <span class="help-block">{{ $errors->first('language_id', ':message') }}</span>
             </div>
+        </div>--}}
+        <div class="form-group  {{ $errors->has('type') ? 'has-error' : '' }}">
+            {!! Form::label('type', trans("admin/article.type"), array('class' => 'control-label')) !!}
+            <div class="controls">
+                {!! Form::select('type', $types, @isset($article)? $article->type : 'default', array('class' => 'form-control')) !!}
+                <span class="help-block">{{ $errors->first('type', ':message') }}</span>
+            </div>
         </div>
+        <input type="hidden" name="language_id" value="1">
         <div class="form-group  {{ $errors->has('article_category_id') ? 'has-error' : '' }}">
             {!! Form::label('language_id', trans("admin/article.category"), array('class' => 'control-label')) !!}
             <div class="controls">
@@ -51,17 +59,17 @@
                 <span class="help-block">{{ $errors->first('content', ':message') }}</span>
             </div>
         </div>
-        <div class="form-group  {{ $errors->has('source') ? 'has-error' : '' }}">
+        {{--<div class="form-group  {{ $errors->has('source') ? 'has-error' : '' }}">
             {!! Form::label('source', trans("admin/article.source"), array('class' => 'control-label')) !!}
             <div class="controls">
                 {!! Form::text('source', null, array('class' => 'form-control')) !!}
                 <span class="help-block">{{ $errors->first('source', ':message') }}</span>
             </div>
-        </div>
+        </div>--}}
         <div
                 class="form-group {!! $errors->has('picture') ? 'error' : '' !!} ">
             <div class="col-lg-12">
-                {!! Form::label('source', trans("admin/article.picture"), array('class' => 'control-label')) !!}
+                {!! Form::label('picture', trans("admin/article.picture"), array('class' => 'control-label')) !!}
                 <input name="picture"
                        type="file" class="uploader" id="image" value="Upload"/>
             </div>

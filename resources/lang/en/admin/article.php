@@ -7,5 +7,5 @@ return [
     'source' => 'Source',
     'picture' => 'Picture',
     'category' => 'Category',
-
+    'type' => 'Type',
 ];

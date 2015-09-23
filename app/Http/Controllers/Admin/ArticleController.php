@@ -77,8 +77,10 @@ class ArticleController extends AdminController {
     public function edit(Article $article)
     {
         $languages = Language::lists('name', 'id')->toArray();
+        Log::info($languages);
         $articlecategories = ArticleCategory::lists('title', 'id')->toArray();
-        return view('admin.article.create_edit',compact('article','languages','articlecategories'));
+        $types = ['text' => 'Text', 'photo' => 'Photo'];
+        return view('admin.article.create_edit',compact('article','languages','articlecategories','types'));
     }
 
     /**
@@ -141,7 +143,7 @@ class ArticleController extends AdminController {
     {
         $article = Article::join('languages', 'languages.id', '=', 'articles.language_id')
             ->join('article_categories', 'article_categories.id', '=', 'articles.article_category_id')
-            ->select(array('articles.id','articles.title','article_categories.title as category', 'languages.name', 
+            ->select(array('articles.id','articles.title','article_categories.title as category'/*, 'languages.name'*/,
                 'articles.created_at'));
 
         return Datatables::of($article)

@@ -24,7 +24,7 @@
         <tr>
             <th>{{ trans("admin/modal.title") }}</th>
             <th>{{ trans("admin/article.category") }}</th>
-            <th>{{ trans("admin/admin.language") }}</th>
+            {{--<th>{{ trans("admin/admin.language") }}</th>--}}
             <th>{{ trans("admin/admin.created_at") }}</th>
             <th>{{ trans("admin/admin.action") }}</th>
         </tr>

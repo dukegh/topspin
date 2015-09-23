@@ -36,7 +36,7 @@ class ArticlesController extends Controller {
             $pages['previous'] = ($needPage == 1) ? false : $needPage - 1;
             $pages['next'] = ($needPage == $curPage) ? false : $needPage + 1;
             $pages['last'] = $curPage;
-            $pages['photo'] = true;
+            $pages['photo'] = $article->type == 'photo';
         }
 		return view('article.view', compact('article', 'pages'));
 	}
