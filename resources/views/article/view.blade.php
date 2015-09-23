@@ -39,7 +39,7 @@
     </style>
     <script type="application/javascript">
         $(function() {
-            $('ul.pager').hide();
+            /*$('ul.pager').hide();*/
             var img = $('#content').find('img');
             if (img.length > 0) {
                 img.first().wrap( '<div id="photoframe" style="position: relative;"></div>' );
@@ -53,8 +53,8 @@
 
 {{-- Content --}}
 @section('content')
-    <h3>{{ $article->title }}</h3>
-    <p>{!! $article->introduction !!}</p>
+    <h3>{{ $article->title }}</h3><span class="glyphicon glyphicon-user"></span> by <span class="muted">{{ $article->author->name }}</span>
+    {{--<p>{!! $article->introduction !!}</p>--}}
     @if($article->picture!="")
         <img alt="{{$article->picture}}"
              src="{!! URL::to('appfiles/article/'.$article->id.'/'.$article->picture) !!}"/>

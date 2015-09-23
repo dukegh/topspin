@@ -33,7 +33,7 @@
             <!-- ./ content -->
     <script type="text/javascript">
         $(function () {
-            $('textarea').summernote({height: 250});
+            $('textarea:not([name="introduction"])').summernote({height: 250});
             $('form').submit(function (event) {
                 event.preventDefault();
                 var form = $(this);

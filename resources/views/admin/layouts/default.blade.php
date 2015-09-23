@@ -57,7 +57,7 @@
                 $(".iframe").colorbox({
                     iframe: true,
                     width: "80%",
-                    height: "80%",
+                    height: "95%",
                     onClosed: function () {
                         oTable.ajax.reload();
                     }
