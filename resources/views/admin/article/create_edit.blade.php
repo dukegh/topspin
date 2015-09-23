@@ -94,7 +94,7 @@
         </button>
         <button type="submit" class="btn btn-sm btn-success">
             <span class="glyphicon glyphicon-ok-circle"></span>
-            @if	(isset($news))
+            @if	(isset($article))
                 {{ trans("admin/modal.edit") }}
             @else
                 {{trans("admin/modal.create") }}
