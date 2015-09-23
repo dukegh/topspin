@@ -46,7 +46,9 @@ a:focus {
     cursor: default;
 }
 .btn-primary,
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
     background-image: -webkit-linear-gradient(#1c70a1, #2c398b 6%, #14208a);
     background-image: -o-linear-gradient(#1c70a1, #2c398b 6%, #14208a);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#1c70a1), color-stop(6%, #2c398b), to(#14208a));

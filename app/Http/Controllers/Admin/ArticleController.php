@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Admin\ArticleRequest;
 use Illuminate\Support\Facades\Auth;
 use Datatables;
+use Log;
 
 class ArticleController extends AdminController {
 
@@ -90,20 +91,20 @@ class ArticleController extends AdminController {
     {
         $article -> user_id = Auth::id();
         $picture = "";
-        if(Input::hasFile('image'))
+        if(Input::hasFile('files'))
         {
-            $file = Input::file('image');
+            $file = Input::file('files');
             $filename = $file->getClientOriginalName();
             $extension = $file -> getClientOriginalExtension();
             $picture = sha1($filename . time()) . '.' . $extension;
         }
         $article -> picture = $picture;
-        $article -> update($request->except('image'));
+        $article -> update($request->except('files'));
 
-        if(Input::hasFile('image'))
+        if(Input::hasFile('files'))
         {
-            $destinationPath = public_path() . '/images/article/'.$article->id.'/';
-            Input::file('image')->move($destinationPath, $picture);
+            $destinationPath = public_path() . '/appfiles/article/'.$article->id.'/';
+            Input::file('files')->move($destinationPath, $picture);
         }
     }
 

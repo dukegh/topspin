@@ -22,9 +22,11 @@ class ArticlesController extends Controller {
         $newContent = '';
         $curPage = 1;
         foreach (explode("\n", $content) as $line) {
-            if (strpos($line, '<!--nextpage-->') !== false) {
+            $nextPagePos = strpos($line, '<!--nextpage-->');
+            if ($nextPagePos !== false) {
+                if ($curPage == $needPage) $newContent .= substr($line, 0, $nextPagePos) . "\n";
                 $curPage++;
-                continue;
+                $line = substr($line, $nextPagePos + 15);
             }
             if ($curPage == $needPage) $newContent .= $line . "\n";
         }
@@ -33,6 +35,8 @@ class ArticlesController extends Controller {
             $article->content = $newContent;
             $pages['previous'] = ($needPage == 1) ? false : $needPage - 1;
             $pages['next'] = ($needPage == $curPage) ? false : $needPage + 1;
+            $pages['last'] = $curPage;
+            $pages['photo'] = true;
         }
 		return view('article.view', compact('article', 'pages'));
 	}
