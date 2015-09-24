@@ -1,15 +1,11 @@
 @extends('admin.layouts.modal')
 {{-- Content --}}
 @section('content')
-        <!-- Tabs -->
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#tab-general" data-toggle="tab"> {{
-			trans("admin/modal.general") }}</a></li>
-</ul>
-<!-- ./ tabs -->
 @if (isset($article))
+<h3>Edit article</h3>
 {!! Form::model($article, array('url' => URL::to('admin/article') . '/' . $article->id, 'method' => 'put','id'=>'fupload', 'class' => 'bf', 'files'=> true)) !!}
 @else
+<h3>Add article</h3>
 {!! Form::open(array('url' => URL::to('admin/article'), 'method' => 'post', 'class' => 'bf','id'=>'fupload', 'files'=> true)) !!}
 @endif
         <!-- Tabs Content -->
@@ -23,19 +19,25 @@
                 <span class="help-block">{{ $errors->first('language_id', ':message') }}</span>
             </div>
         </div>--}}
-        <div class="form-group  {{ $errors->has('type') ? 'has-error' : '' }}">
-            {!! Form::label('type', trans("admin/article.type"), array('class' => 'control-label')) !!}
-            <div class="controls">
-                {!! Form::select('type', $types, @isset($article)? $article->type : 'default', array('class' => 'form-control')) !!}
-                <span class="help-block">{{ $errors->first('type', ':message') }}</span>
-            </div>
-        </div>
         <input type="hidden" name="language_id" value="1">
-        <div class="form-group  {{ $errors->has('article_category_id') ? 'has-error' : '' }}">
-            {!! Form::label('language_id', trans("admin/article.category"), array('class' => 'control-label')) !!}
-            <div class="controls">
-                {!! Form::select('article_category_id', $articlecategories, @isset($article)? $article->article_category_id : '1', array('class' => 'form-control')) !!}
-                <span class="help-block">{{ $errors->first('article_category_id', ':message') }}</span>
+        <div style="width: 100%">
+            <div style="width: 47%;display: inline-block;float: left">
+                <div class="form-group  {{ $errors->has('type') ? 'has-error' : '' }}">
+                    {!! Form::label('type', trans("admin/article.type"), array('class' => 'control-label')) !!}
+                    <div class="controls">
+                        {!! Form::select('type', $types, @isset($article)? $article->type : 'default', array('class' => 'form-control')) !!}
+                        <span class="help-block">{{ $errors->first('type', ':message') }}</span>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 47%;display: inline-block;clear: both;margin-left: 6%">
+                <div class="form-group  {{ $errors->has('article_category_id') ? 'has-error' : '' }}">
+                    {!! Form::label('language_id', trans("admin/article.category"), array('class' => 'control-label')) !!}
+                    <div class="controls">
+                        {!! Form::select('article_category_id', $articlecategories, @isset($article)? $article->article_category_id : '1', array('class' => 'form-control')) !!}
+                        <span class="help-block">{{ $errors->first('article_category_id', ':message') }}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group  {{ $errors->has('title') ? 'has-error' : '' }}">
@@ -45,10 +47,11 @@
                 <span class="help-block">{{ $errors->first('title', ':message') }}</span>
             </div>
         </div>
+
         <div class="form-group  {{ $errors->has('introduction') ? 'has-error' : '' }}">
             {!! Form::label('introduction', trans("admin/article.introduction"), array('class' => 'control-label')) !!}
             <div class="controls">
-                {!! Form::textarea('introduction', null, array('class' => 'form-control')) !!}
+                {!! Form::textarea('introduction', null, array('class' => 'form-control', 'rows' => 3)) !!}
                 <span class="help-block">{{ $errors->first('introduction', ':message') }}</span>
             </div>
         </div>
