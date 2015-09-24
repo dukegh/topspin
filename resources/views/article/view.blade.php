@@ -14,8 +14,8 @@
         @for ($i = $pages['begin']; $i <= $pages['end']; $i++)
             <li class="{{$i == $pages['current'] ? 'active' : ''}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $i) }}">{{$i}}</a></li>
         @endfor
-        <li class="next{{$pages['current'] ==$pages['last'] ? ' disabled' : ''}}"><a id="nextPage" href="{{ URL::to('article/'.$article->slug.'/' . $pages['next']) }}" title="Next"><span class="fa fa-step-forward"></span></a></li>
-        <li class="last{{$pages['current'] ==$pages['last'] ? ' disabled' : ''}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $pages['last']) }}" title="Last"><span class="fa fa-fast-forward"></span></a></li>
+        <li class="next{{$pages['current'] == $pages['last'] ? ' disabled' : ''}}"><a id="nextPage" href="{{ URL::to('article/'.$article->slug.'/' . $pages['next']) }}" title="Next"><span class="fa fa-step-forward"></span></a></li>
+        <li class="last{{$pages['current'] == $pages['last'] ? ' disabled' : ''}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $pages['last']) }}" title="Last"><span class="fa fa-fast-forward"></span></a></li>
     </ul>
     </div>
 @stop
