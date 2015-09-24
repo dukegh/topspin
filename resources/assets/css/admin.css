@@ -45,6 +45,15 @@ a:focus {
     border-color: #38C;
     cursor: default;
 }
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #39aaf6;
+    border-color: #39aaf6;
+}
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:focus,

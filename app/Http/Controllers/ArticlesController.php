@@ -36,7 +36,16 @@ class ArticlesController extends Controller {
             $pages['previous'] = ($needPage == 1) ? false : $needPage - 1;
             $pages['next'] = ($needPage == $curPage) ? false : $needPage + 1;
             $pages['last'] = $curPage;
+            $pages['current'] = $needPage;
             $pages['photo'] = $article->type == 'photo';
+            $maxLinks = 7;
+            $maxBegin = $pages['last'] - ($maxLinks - 1);
+            if ($maxBegin < 1) $maxBegin = 1;
+            $pages['begin'] = $pages['current'] - floor($maxLinks / 2);
+            if ($pages['begin'] < 1) $pages['begin'] = 1;
+            if ($pages['begin'] > $maxBegin) $pages['begin'] = $maxBegin;
+            $pages['end'] = $pages['begin'] + ($maxLinks - 1);
+            if ($pages['end'] > $pages['last']) $pages['end'] = $pages['last'];
         }
 		return view('article.view', compact('article', 'pages'));
 	}

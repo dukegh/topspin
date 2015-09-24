@@ -7,10 +7,17 @@
 @stop
 
 @section('pager')
-    <ul class="pager">
-        <li class="{{$pages['previous'] ? '' : 'disabled'}}"><a id="previousPage" href="{{ URL::to('article/'.$article->slug.'/' . ($pages['previous'] ?: $pages['last'])) }}">Previous</a></li>
-        <li class="{{$pages['next'] ? '' : 'disabled'}}"><a id="nextPage" href="{{ URL::to('article/'.$article->slug.'/' . $pages['next']) }}">Next</a></li>
+    <div class="text-center">
+    <ul class="pagination">
+        <li class="first{{$pages['current'] == 1 ? ' disabled' : ''}}"><a href="{{ URL::to('article/'.$article->slug.'/1') }}" title="Start"><span class="fa fa-fast-backward"></span></a></li>
+        <li class="prev{{$pages['current'] == 1 ? ' disabled' : ''}}"><a id="previousPage" href="{{ URL::to('article/'.$article->slug.'/' . ($pages['previous'] ?: $pages['last'])) }}" title="Prev"><span class="fa fa-step-backward"></span></a></li>
+        @for ($i = $pages['begin']; $i <= $pages['end']; $i++)
+            <li class="{{$i == $pages['current'] ? 'active' : ''}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $i) }}">{{$i}}</a></li>
+        @endfor
+        <li class="next{{$pages['current'] ==$pages['last'] ? ' disabled' : ''}}"><a id="nextPage" href="{{ URL::to('article/'.$article->slug.'/' . $pages['next']) }}" title="Next"><span class="fa fa-step-forward"></span></a></li>
+        <li class="last{{$pages['current'] ==$pages['last'] ? ' disabled' : ''}}"><a href="{{ URL::to('article/'.$article->slug.'/' . $pages['last']) }}" title="Last"><span class="fa fa-fast-forward"></span></a></li>
     </ul>
+    </div>
 @stop
 
 @section('photopager')
