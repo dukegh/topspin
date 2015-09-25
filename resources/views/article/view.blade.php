@@ -2,8 +2,17 @@
 {{-- Web site Title --}}
 @section('title') {!!  $article->title !!} :: @parent @stop
 
+@section('meta_keywords')
+    <meta name="keywords" content="{!! $article->tags !!}"/>
+@stop
+
 @section('meta_author')
-    <meta name="author" content="{!! $article->author->username !!}"/>
+    <meta name="author" content="{!! $article->author->name !!}"/>
+@stop
+
+@section('meta_description')
+    <meta name="description" content="{!! preg_replace("/\r|\n/", '', strip_tags($article->introduction)) !!}"/>
+    {!! $og->renderTags() !!}
 @stop
 
 @section('pager')
@@ -61,11 +70,11 @@
 {{-- Content --}}
 @section('content')
     <h3>{{ $article->title }}</h3><span class="glyphicon glyphicon-user"></span> by <span class="muted">{{ $article->author->name }}</span>
-    {{--<p>{!! $article->introduction !!}</p>--}}
+    {{--<p>{!! $article->introduction !!}</p>
     @if($article->picture!="")
         <img alt="{{$article->picture}}"
              src="{!! URL::to('appfiles/article/'.$article->id.'/'.$article->picture) !!}"/>
-    @endif
+    @endif--}}
     <div id="content">{!! $article->content !!}</div>
     @if ($pages['next'] || $pages['previous'])
         @yield('pager')

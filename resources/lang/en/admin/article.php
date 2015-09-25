@@ -8,5 +8,5 @@ return [
     'picture' => 'Picture',
     'category' => 'Category',
     'type' => 'Type',
-    'tags' => 'Tags'
+    'tags' => 'Tags (comma separated)'
 ];

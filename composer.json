@@ -12,7 +12,8 @@
         "laravelcollective/html": "5.1.*",
         "cviebrock/eloquent-sluggable": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "blueimp/jquery-file-upload": "^9.11"
+        "blueimp/jquery-file-upload": "^9.11",
+        "chriskonnertz/open-graph": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

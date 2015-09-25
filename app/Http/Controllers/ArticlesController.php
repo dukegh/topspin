@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use ChrisKonnertz\OpenGraph\OpenGraph;
 
 class ArticlesController extends Controller {
 
@@ -18,6 +19,7 @@ class ArticlesController extends Controller {
 	{
         /** @var Article $article */
 		$article = Article::findBySlugOrId($slug);
+        // Paginator section
         $content = $article->content;
         $newContent = '';
         $curPage = 1;
@@ -47,7 +49,25 @@ class ArticlesController extends Controller {
             $pages['end'] = $pages['begin'] + ($maxLinks - 1);
             if ($pages['end'] > $pages['last']) $pages['end'] = $pages['last'];
         }
-		return view('article.view', compact('article', 'pages'));
+        // ./ Paginator section
+
+        $og = new OpenGraph();
+        $og->title($article->title)
+            ->type('article')
+            ->image('http:' . $article->getPictureUrl('200x200'))
+            ->description($article->introduction)
+            ->url()
+            ->article(['author' => $article->author->name,
+                'published_time' => $article->created_at,
+                'modified_time' => $article->updated_at,
+                'section' => $article->category->title
+            ]);
+        if ($article->tags) {
+            foreach (preg_split('/,/', $article->tags) as $tag) {
+                $og->article(['tag' => trim($tag)]);
+            }
+        }
+		return view('article.view', compact('article', 'pages', 'og'));
 	}
 
 }

@@ -9,6 +9,7 @@ use App\ArticleCategory;
 use App\Image;
 use App\Language;
 use Config;
+use File;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Admin\ArticleRequest;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,8 @@ class ArticleController extends AdminController {
         $languages = Language::lists('name', 'id')->toArray();
         $articlecategories = ArticleCategory::lists('title', 'id')->toArray();
         $types = ['text' => 'Text', 'photo' => 'Photo'];
-        return view('admin.article.create_edit', compact('languages', 'articlecategories', 'types'));
+        $picture = '/appfiles/photoalbum/no_photo.png';
+        return view('admin.article.create_edit', compact('languages', 'articlecategories', 'types', 'picture'));
     }
 
     /**
@@ -56,7 +58,6 @@ class ArticleController extends AdminController {
         $article = new Article($request->except('image'));
         $article -> user_id = Auth::id();
 
-        $picture = "";
         if(Input::hasFile('image'))
         {
             $file = Input::file('image');
@@ -64,8 +65,13 @@ class ArticleController extends AdminController {
             $extension = $file -> getClientOriginalExtension();
             $picture = sha1($filename . time()) . '.' . $extension;
         }
-        $article -> picture = $picture;
         $article -> save();
+
+        if (Input::get('picture')) {
+            $destinationPath = public_path() . '/appfiles/article/';
+            File::makeDirectory($destinationPath . $article->id, 0775, true);
+            File::move($destinationPath . '1/' . $article->picture, $destinationPath . $article->id . '/' . $article->picture);
+        }
 
         if(Input::hasFile('image'))
         {

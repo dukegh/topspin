@@ -79,7 +79,7 @@ class Article extends Model implements SluggableInterface {
 	 */
 	public function category()
 	{
-		return $this->belongsTo('App\ArticleCategory');
+		return $this->belongsTo('App\ArticleCategory', 'article_category_id');
 	}
 
 	function getPictureUrl($size = null) {

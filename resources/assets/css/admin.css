@@ -72,3 +72,7 @@ a:focus {
 #article-img {
     width: 100%;
 }
+#articleFormTitle {
+    position: absolute;
+    top: 0;
+}

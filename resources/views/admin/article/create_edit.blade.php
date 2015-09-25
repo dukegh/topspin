@@ -2,10 +2,10 @@
 {{-- Content --}}
 @section('content')
 @if (isset($article))
-<h3>Edit article</h3>
+<h3 id="articleFormTitle">Edit article</h3>
 {!! Form::model($article, array('url' => URL::to('admin/article') . '/' . $article->id, 'method' => 'put','id'=>'fupload', 'class' => 'bf', 'files'=> true)) !!}
 @else
-<h3>Add article</h3>
+<h3 id="articleFormTitle">Add article</h3>
 {!! Form::open(array('url' => URL::to('admin/article'), 'method' => 'post', 'class' => 'bf','id'=>'fupload', 'files'=> true)) !!}
 @endif
         <!-- Tabs Content -->
@@ -118,7 +118,7 @@
 {!! Form::close() !!}
 {!! Form::open(['method' => 'POST', 'class' => 'hide']) !!}
     <input type="hidden" name="storage" value="article">
-    <input type="hidden" name="uid" value="{{$article->id}}">
+    <input type="hidden" name="uid" value="{{isset($article) ? $article->id : 1}}">
     <input type="hidden" name="filetype" value="image">
     <input id="fileupload" type="file" name="file" data-url="/admin/fileupload">
 {!! Form::close() !!}
@@ -130,6 +130,17 @@
             done: function (e, data) {
                 $('#article-img').attr('src', data.result.url);
                 $('input[name="picture"]').attr('value', data.result.filename);
+            },
+            fail: function (e, data) {
+                if (data.textStatus == 'error') {
+                    var jsonResponse = jQuery.parseJSON(data.jqXHR.responseText);
+                    alert(jsonResponse.error);
+                }
+                $('#article-img').attr('src', self.prevImgSrc);
+            },
+            start: function (e) {
+                self.prevImgSrc = $('#article-img').attr('src');
+                $('#article-img').attr('src', '/img/loading124.gif');
             }
         });
         $('#uploadImageButton').click(function(){
