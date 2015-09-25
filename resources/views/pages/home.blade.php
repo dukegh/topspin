@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <a href="{{URL::to('article/'.$post->slug.'')}}" class="thumbnail"><img
-                                        src="http://placehold.it/260x180" alt=""></a>
+                                        src="{{$post->getPictureUrl('150x150')}}" alt="" width="150"></a>
                         </div>
                         <div class="col-md-10">
                             <p>{!! $post->introduction !!}</p>

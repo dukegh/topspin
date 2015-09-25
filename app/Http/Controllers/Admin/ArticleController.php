@@ -8,6 +8,7 @@ use App\Article;
 use App\ArticleCategory;
 use App\Image;
 use App\Language;
+use Config;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Admin\ArticleRequest;
 use Illuminate\Support\Facades\Auth;
@@ -83,7 +84,13 @@ class ArticleController extends AdminController {
         $languages = Language::lists('name', 'id')->toArray();
         $articlecategories = ArticleCategory::lists('title', 'id')->toArray();
         $types = ['text' => 'Text', 'photo' => 'Photo'];
-        return view('admin.article.create_edit',compact('article','languages','articlecategories','types'));
+        if ($article->picture) {
+            $picture = '//' . Config::get('topspin.imageHost');
+            $picture .= "/article/{$article->id}/{$article->picture}";
+        } else {
+            $picture = '/appfiles/photoalbum/no_photo.png';
+        }
+        return view('admin.article.create_edit',compact('article','languages','articlecategories','types', 'picture'));
     }
 
     /**
@@ -96,41 +103,15 @@ class ArticleController extends AdminController {
     {
         try {
             $article->user_id = Auth::id();
-            $picture = "";
-            $pictureUploadedFile = Input::file('picture');
-            if ($pictureUploadedFile) {
-                /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $file */
-                $file = $pictureUploadedFile;
-                if ($file->getError() == 1)
-                    throw new Exception(sprintf(
-                        'The file "%s" exceeds your upload maximum filesize (limit is %d KiB).',
-                        $file->getClientOriginalName(), $file->getMaxFilesize() / 1024));
-                if ($file->getError()) throw new Exception("Uploaded file error: " . $file->getErrorMessage());
-                $mimeType = $file->getMimeType();
-                $allowedMimeTypes = ['jpg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png'];
-                if (!in_array($mimeType, $allowedMimeTypes)) {
-                    throw new Exception("Not allowed mime type of uploaded file: $mimeType");
-                }
-                $extension = array_search($mimeType, $allowedMimeTypes);
-                $image = new Image();
-                $image->extension = $extension;
-                $image->save();
-                Log::info('Uploaded image id: ' . $image->id);
-                $picture = $image->id . '.' . $extension;
-            }
-            $article->picture = $picture;
-            $article->update($request->except('files', 'picture'));
+            $article->update($request->except('files'));
 
-            $destinationPath = public_path() . '/appfiles/article/' . $article->id . '/';
             if (Input::hasFile('files')) {
+                $destinationPath = public_path() . '/appfiles/article/' . $article->id . '/';
                 $file = Input::file('files');
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
                 $picture = sha1($filename . time()) . '.' . $extension;
                 Input::file('files')->move($destinationPath, $picture);
-            }
-            if (Input::hasFile('picture')) {
-                Input::file('picture')->move($destinationPath, $picture);
             }
         } catch (Exception $e) {
             Log::error($e->getMessage());

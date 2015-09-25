@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Config;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App
  *
  * @property string content
+ * @property string picture
+ * @property mixed introduction
  */
 class Article extends Model implements SluggableInterface {
 
@@ -77,6 +80,15 @@ class Article extends Model implements SluggableInterface {
 	public function category()
 	{
 		return $this->belongsTo('App\ArticleCategory');
+	}
+
+	function getPictureUrl($size = null) {
+		if ($this->picture) {
+			$picture = $size ? substr($this->picture, 0, -4) . '_' . $size . substr($this->picture, -4) : $this->picture;
+			return '//' . Config::get('topspin.imageHost') . '/article/' . $this->id . '/' . $picture;
+		} else {
+			return '/appfiles/photoalbum/no_photo.png';
+		}
 	}
 
 }

@@ -75,4 +75,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('user/{user}/edit', 'Admin\UserController@edit');
     Route::get('user/{user}/delete', 'Admin\UserController@delete');
     Route::resource('user', 'Admin\UserController');
+
+    # FileUpload
+    Route::post('fileupload', 'Admin\FileUploadController@store');
 });

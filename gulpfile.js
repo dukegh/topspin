@@ -22,6 +22,7 @@ var paths = {
     'select2': 'vendor/select2/dist',
     'jquery_ui':  'vendor/jquery-ui',
     'justifiedGallery':  'vendor/Justified-Gallery/dist/',
+    'jquery_file_upload': '../vendor/blueimp/jquery-file-upload'
 };
 
 elixir.config.sourcemaps = false;
@@ -77,6 +78,7 @@ elixir(function(mix) {
         '../../' + paths.summernote + '/summernote.css',
         '../../' + paths.summernote + '/summernote-bs3.css',
         '../../' + paths.select2 + '/css/select2.css',
+        '../../' + paths.jquery_file_upload + '/css/jquery.fileupload.css',
         'sb-admin-2.css',
         'admin.css'
     ], 'public/css/admin.css');
@@ -94,6 +96,9 @@ elixir(function(mix) {
         '../../' + paths.metisMenu + '/metisMenu.js',
         '../../' + paths.summernote + '/summernote.js',
         '../../' + paths.select2 + '/js/select2.js',
+        '../../' + paths.jquery_file_upload + '/js/vendor/jquery.ui.widget.js',
+        '../../' + paths.jquery_file_upload + '/js/jquery.iframe-transport.js',
+        '../../' + paths.jquery_file_upload + '/js/jquery.fileupload.js',
         'bootstrap-dataTables-paging.js',
         'dataTables.bootstrap.js',
         'datatables.fnReloadAjax.js',

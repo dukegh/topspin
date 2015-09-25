@@ -63,10 +63,12 @@
                 <div class="form-group {!! $errors->has('picture') ? 'error' : '' !!} ">
                     <div class="col-lg-12">
                         {!! Form::label('picture', trans("admin/article.picture"), array('class' => 'control-label')) !!}
-                        @if ($article->picture)
-                            <img src="//{{Config::get('topspin.imageHost')}}/article/{{$article->id}}/{{$article->picture}}" style="width: 100%">
-                        @endif
-                        <input name="picture" type="file" class="uploader" id="image" value="Upload"/>
+                        <img src="{{$picture}}" id="article-img">
+                        {!! Form::hidden('picture') !!}
+                        <span class="btn btn-success fileinput-button" id="uploadImageButton" style="margin-top: 10px;">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Select file...</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -106,6 +108,26 @@
     </div>
 </div>
 <!-- ./ form actions -->
+{!! Form::close() !!}
+{!! Form::open(['method' => 'POST', 'class' => 'hide']) !!}
+    <input type="hidden" name="storage" value="article">
+    <input type="hidden" name="uid" value="{{$article->id}}">
+    <input type="hidden" name="filetype" value="image">
+    <input id="fileupload" type="file" name="file" data-url="/admin/fileupload">
+{!! Form::close() !!}
 
-</form>
+<script type="application/javascript">
+    $(function () {
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $('#article-img').attr('src', data.result.url);
+                $('input[name="picture"]').attr('value', data.result.filename);
+            }
+        });
+        $('#uploadImageButton').click(function(){
+            $('#fileupload').click();
+        });
+    });
+</script>
 @stop

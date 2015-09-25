@@ -69,3 +69,6 @@ a:focus {
     border: 1px solid #14208a;
     background-color: #14208a;
 }
+#article-img {
+    width: 100%;
+}
