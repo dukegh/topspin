@@ -60,6 +60,13 @@
                         <span class="help-block">{{ $errors->first('article_category_id', ':message') }}</span>
                     </div>
                 </div>
+                <div class="form-group  {{ $errors->has('tags') ? 'has-error' : '' }}">
+                    {!! Form::label('tags', trans("admin/article.tags"), array('class' => 'control-label')) !!}
+                    <div class="controls">
+                        {!! Form::textarea('tags', null, array('class' => 'form-control', 'rows' => 3)) !!}
+                        <span class="help-block">{{ $errors->first('article_category_id', ':message') }}</span>
+                    </div>
+                </div>
                 <div class="form-group {!! $errors->has('picture') ? 'error' : '' !!} ">
                     <div class="col-lg-12">
                         {!! Form::label('picture', trans("admin/article.picture"), array('class' => 'control-label')) !!}
