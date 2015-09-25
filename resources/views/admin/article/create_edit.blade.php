@@ -21,7 +21,31 @@
         </div>--}}
         <input type="hidden" name="language_id" value="1">
         <div style="width: 100%">
-            <div style="width: 47%;display: inline-block;float: left">
+            <div style="width: 80%;display: inline-block;float: left">
+                <div class="form-group  {{ $errors->has('title') ? 'has-error' : '' }}">
+                    {!! Form::label('title', trans("admin/modal.title"), array('class' => 'control-label')) !!}
+                    <div class="controls">
+                        {!! Form::text('title', null, array('class' => 'form-control')) !!}
+                        <span class="help-block">{{ $errors->first('title', ':message') }}</span>
+                    </div>
+                </div>
+
+                <div class="form-group  {{ $errors->has('introduction') ? 'has-error' : '' }}">
+                    {!! Form::label('introduction', trans("admin/article.introduction"), array('class' => 'control-label')) !!}
+                    <div class="controls">
+                        {!! Form::textarea('introduction', null, array('class' => 'form-control', 'rows' => 3)) !!}
+                        <span class="help-block">{{ $errors->first('introduction', ':message') }}</span>
+                    </div>
+                </div>
+                <div class="form-group  {{ $errors->has('content') ? 'has-error' : '' }}">
+                    {!! Form::label('content', trans("admin/article.content"), array('class' => 'control-label')) !!}
+                    <div class="controls">
+                        {!! Form::textarea('content', null, array('class' => 'form-control')) !!}
+                        <span class="help-block">{{ $errors->first('content', ':message') }}</span>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 18%;display: inline-block;clear: both;margin-left: 2%">
                 <div class="form-group  {{ $errors->has('type') ? 'has-error' : '' }}">
                     {!! Form::label('type', trans("admin/article.type"), array('class' => 'control-label')) !!}
                     <div class="controls">
@@ -29,8 +53,6 @@
                         <span class="help-block">{{ $errors->first('type', ':message') }}</span>
                     </div>
                 </div>
-            </div>
-            <div style="width: 47%;display: inline-block;clear: both;margin-left: 6%">
                 <div class="form-group  {{ $errors->has('article_category_id') ? 'has-error' : '' }}">
                     {!! Form::label('language_id', trans("admin/article.category"), array('class' => 'control-label')) !!}
                     <div class="controls">
@@ -38,28 +60,15 @@
                         <span class="help-block">{{ $errors->first('article_category_id', ':message') }}</span>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group  {{ $errors->has('title') ? 'has-error' : '' }}">
-            {!! Form::label('title', trans("admin/modal.title"), array('class' => 'control-label')) !!}
-            <div class="controls">
-                {!! Form::text('title', null, array('class' => 'form-control')) !!}
-                <span class="help-block">{{ $errors->first('title', ':message') }}</span>
-            </div>
-        </div>
-
-        <div class="form-group  {{ $errors->has('introduction') ? 'has-error' : '' }}">
-            {!! Form::label('introduction', trans("admin/article.introduction"), array('class' => 'control-label')) !!}
-            <div class="controls">
-                {!! Form::textarea('introduction', null, array('class' => 'form-control', 'rows' => 3)) !!}
-                <span class="help-block">{{ $errors->first('introduction', ':message') }}</span>
-            </div>
-        </div>
-        <div class="form-group  {{ $errors->has('content') ? 'has-error' : '' }}">
-            {!! Form::label('content', trans("admin/article.content"), array('class' => 'control-label')) !!}
-            <div class="controls">
-                {!! Form::textarea('content', null, array('class' => 'form-control')) !!}
-                <span class="help-block">{{ $errors->first('content', ':message') }}</span>
+                <div class="form-group {!! $errors->has('picture') ? 'error' : '' !!} ">
+                    <div class="col-lg-12">
+                        {!! Form::label('picture', trans("admin/article.picture"), array('class' => 'control-label')) !!}
+                        @if ($article->picture)
+                            <img src="//{{Config::get('topspin.imageHost')}}/article/{{$article->id}}/{{$article->picture}}" style="width: 100%">
+                        @endif
+                        <input name="picture" type="file" class="uploader" id="image" value="Upload"/>
+                    </div>
+                </div>
             </div>
         </div>
         {{--<div class="form-group  {{ $errors->has('source') ? 'has-error' : '' }}">
@@ -69,15 +78,6 @@
                 <span class="help-block">{{ $errors->first('source', ':message') }}</span>
             </div>
         </div>--}}
-        <div
-                class="form-group {!! $errors->has('picture') ? 'error' : '' !!} ">
-            <div class="col-lg-12">
-                {!! Form::label('picture', trans("admin/article.picture"), array('class' => 'control-label')) !!}
-                <input name="picture"
-                       type="file" class="uploader" id="image" value="Upload"/>
-            </div>
-
-        </div>
         <!-- ./ general tab -->
     </div>
     <!-- ./ tabs content -->

@@ -11,6 +11,7 @@
             <excludedPath path="/topspin/storage" />
             <excludedPath path="/topspin/node_modules" />
             <excludedPath path="/topspin/vendor/bin" />
+            <excludedPath path="/topspin/public/appfiles" />
           </excludedPaths>
         </serverdata>
       </paths>
