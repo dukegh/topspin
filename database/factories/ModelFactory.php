@@ -22,14 +22,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Article::class, function (Faker\Generator $faker) {
     return [
-        'language_id' => rand(1, 3),
+        'language_id' => rand(1, 2),
         'user_id' => 1,
         'article_category_id' => rand(1, 2),
         'title' => $faker->sentence,
         'slug' => $faker->slug,
         'introduction' => $faker->paragraph,
         'content' => $faker->text,
-        'source' => $faker->url,
+        'type' => 'text',
     ];
 });
 

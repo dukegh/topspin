@@ -14,14 +14,10 @@ class LanguageTableSeeder extends Seeder {
         $language->save();
 
         $language = new Language();
-        $language->name = 'Српски';
-        $language->lang_code = 'rs';
+        $language->name = 'Русский';
+        $language->lang_code = 'ru';
         $language->save();
 
-        $language = new Language();
-        $language->name = 'Bosanski';
-        $language->lang_code = 'ba';
-        $language->save();
     }
 
 }
