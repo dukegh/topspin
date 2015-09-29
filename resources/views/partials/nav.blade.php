@@ -44,6 +44,10 @@
                                     <li>
                                         <a href="{{ URL::to('admin/dashboard') }}"><i class="fa fa-tachometer"></i> Admin Dashboard</a>
                                     </li>
+                                @else
+                                    <li>
+                                        <a href="{{ URL::to('my/dashboard') }}"><i class="fa fa-tachometer"></i> User Dashboard</a>
+                                    </li>
                                 @endif
                                 <li role="presentation" class="divider"></li>
                             @endif

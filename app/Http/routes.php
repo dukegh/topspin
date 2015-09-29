@@ -79,3 +79,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     # FileUpload
     Route::post('fileupload', 'Admin\FileUploadController@store');
 });
+
+/***************  User routes  **********************************/
+Route::group(['prefix' => 'my', 'middleware' => 'auth'], function() {
+
+    # User Dashboard
+    Route::get('dashboard', 'My\DashboardController@index');
+});
