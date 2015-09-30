@@ -1,27 +1,29 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App;
 use App\Http\Controllers\AdminController;
 use App\Article;
 use App\ArticleCategory;
-use App\Image;
 use App\Language;
+use Auth;
 use Config;
 use File;
-use Illuminate\Support\Facades\Input;
+use Input;
 use App\Http\Requests\Admin\ArticleRequest;
-use Illuminate\Support\Facades\Auth;
 use Datatables;
 use Log;
 use Exception;
+use Response;
 
 class ArticleController extends AdminController {
 
+    /** @noinspection PhpMissingParentConstructorInspection */
     public function __construct()
     {
-        view()->share('type', 'article');
+        /** @var \Illuminate\Contracts\View\Factory $view */
+        $view = view();
+        $view->share('type', 'article');
     }
      /*
     * Display a listing of the resource.
@@ -56,27 +58,14 @@ class ArticleController extends AdminController {
     public function store(ArticleRequest $request)
     {
         $article = new Article($request->except('image'));
-        $article -> user_id = Auth::id();
+        $article->user_id = Auth::id();
 
-        if(Input::hasFile('image'))
-        {
-            $file = Input::file('image');
-            $filename = $file->getClientOriginalName();
-            $extension = $file -> getClientOriginalExtension();
-            $picture = sha1($filename . time()) . '.' . $extension;
-        }
-        $article -> save();
+        $article->save();
 
         if (Input::get('picture')) {
             $destinationPath = public_path() . '/appfiles/article/';
             File::makeDirectory($destinationPath . $article->id, 0775, true);
             File::move($destinationPath . '1/' . $article->picture, $destinationPath . $article->id . '/' . $article->picture);
-        }
-
-        if(Input::hasFile('image'))
-        {
-            $destinationPath = public_path() . '/images/article/'.$article->id.'/';
-            Input::file('image')->move($destinationPath, $picture);
         }
     }
     /**
@@ -100,9 +89,10 @@ class ArticleController extends AdminController {
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the Article in storage.
      *
-     * @param  int  $id
+     * @param ArticleRequest $request
+     * @param Article $article
      * @return Response
      */
     public function update(ArticleRequest $request, Article $article)
@@ -123,6 +113,7 @@ class ArticleController extends AdminController {
             Log::error($e->getMessage());
             return response()->json(['error' => $e->getMessage()], 503);
         }
+        return response();
     }
 
     /**
@@ -161,6 +152,7 @@ class ArticleController extends AdminController {
             ->select(array('articles.id','articles.title','article_categories.title as category'/*, 'languages.name'*/,
                 'articles.created_at'));
 
+        /** @noinspection HtmlUnknownTarget */
         return Datatables::of($article)
             ->add_column('actions', '<a href="{{{ URL::to(\'admin/article/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a>
                     <a href="{{{ URL::to(\'admin/article/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>

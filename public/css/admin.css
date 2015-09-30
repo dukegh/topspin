@@ -22703,6 +22703,44 @@ td.visible-print {
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
 
+@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+
 /*!
  * Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
@@ -23104,6 +23142,15 @@ a:focus {
     border-color: #38C;
     cursor: default;
 }
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #39aaf6;
+    border-color: #39aaf6;
+}
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:focus,
@@ -23118,4 +23165,11 @@ a:focus {
     filter: none;
     border: 1px solid #14208a;
     background-color: #14208a;
+}
+#article-img {
+    width: 100%;
+}
+#articleFormTitle {
+    position: absolute;
+    top: 0;
 }

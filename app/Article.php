@@ -91,4 +91,14 @@ class Article extends Model implements SluggableInterface {
 		}
 	}
 
+	public static function findBySlugOrId($slug) {
+
+		if (!$result = self::findBySlug($slug)) {
+			return Article::findOrFail($slug);
+		}
+
+		return $result;
+	}
+
+
 }

@@ -138,9 +138,10 @@
                 }
                 $('#article-img').attr('src', self.prevImgSrc);
             },
-            start: function (e) {
-                self.prevImgSrc = $('#article-img').attr('src');
-                $('#article-img').attr('src', '/img/loading124.gif');
+            start: function () {
+                var articleImg = $('#article-img');
+                self.prevImgSrc = articleImg.attr('src');
+                articleImg.attr('src', '/img/loading124.gif');
             }
         });
         $('#uploadImageButton').click(function(){
